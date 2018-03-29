@@ -1,0 +1,12 @@
+<a href="/dashboard">Back to dashboard</a>
+<br>
+<br>
+<a href="logout">Logout</a>
+
+
+
+<h2>Your Playlists</h2>
+    @foreach list in ViewBag.Playlist
+    {
+        <h5><a href="playlist/{playlistId}">@list.name</a></h5>
+    } 

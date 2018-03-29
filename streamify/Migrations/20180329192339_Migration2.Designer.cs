@@ -11,9 +11,10 @@ using System;
 namespace streamify.Migrations
 {
     [DbContext(typeof(StreamifyContext))]
-    partial class StreamifyContextModelSnapshot : ModelSnapshot
+    [Migration("20180329192339_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +27,8 @@ namespace streamify.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Album");
+
+                    b.Property<string>("AlbumArt");
 
                     b.Property<string>("Artist");
 

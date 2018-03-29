@@ -1,7 +1,37 @@
-<a href="logout">logout</a>
+<h3>Search For An Artist!</h3>
+  <div class="container">
+      <input id="searchArtist" class="form-control">
+      <button id="searchArtist">Submit </button>
+  </div>
+  <br>    
 
-<h1> I am a dashboard.</h1>
+<h3>Search For An Album!</h3>
+  <div class="container">
+      <input id="searchAlbum" class="form-control">
+      <button id="searchAlbum">Submit </button>
+  </div>
+
+  <h3>Search For A Track!</h3>
+  <div class="container">
+      <input id="searchTrack" class="form-control">
+      <button id="searchTrack">Submit </button>
+  </div> 
+
+  <br>
+  <br>
+  
 
 
+    <h3>Make a new playlist</h3>
 
-<p>musicmusicmusic</p>
+@model streamify.Models.Playlist
+ 
+<form asp-controller="Streamify" asp-action="NewPlaylist" method="post">
+    <span asp-validation-for="PName"></span>     <!-- First is capital because it needs to match the model key -->  
+    <label asp-for="PName">Playlist Name: </label>
+    <input asp-for="PName"/>
+    <br>
+
+    <input type="submit" name="submit" value="Create Playlist">
+</form>
+   
