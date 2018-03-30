@@ -12,7 +12,6 @@ namespace streamify.Models
 
         public string Artist {get;set;}  //create object of User type named User. For queries only, not placed in DB
 
-        public string Album {get;set;}
         
     }
 }

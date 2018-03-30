@@ -48,6 +48,7 @@ namespace streamify.Controllers
         [Route("GetArtist/{search}")]
         public IActionResult GetArtist(string search)
         {
+            ViewBag.Search = "";
             
             object ArtistInfo = new JObject();
             WebRequest.GetArtist(search, ApiResponse =>
@@ -96,6 +97,8 @@ namespace streamify.Controllers
                     
                 }
             ).Wait();
+
+            ViewBag.Playlists = _context.Playlists.ToList();
         
             return View("trackresult");
         }
@@ -137,38 +140,78 @@ namespace streamify.Controllers
 
             else
             {
+                ViewBag.Playlists = _context.Playlists.ToList();
                 return View("dashboard");
             }
         }
 
         [HttpGet]
-        [Route("playlists")]
-        public IActionResult Playlists()
-
-        {
-            if (SessionCheck()==0)
-            {
-                return RedirectToAction("Index","User");
-            }
-
-            return RedirectToAction("playlists");
-        }
-
-
-        [HttpGet]
-        [Route("show/{playlistId}")]
-        public IActionResult Playlists(int playlistId)
+        [Route("delete/{playlistId}")]
+        public IActionResult Delete(int PlaylistId)
         {
             if (SessionCheck()==0)
             {
                 return RedirectToAction("Index","User");
             }
             
+            Playlist thisPlaylist = _context.Playlists.SingleOrDefault(p=>p.PlaylistId==PlaylistId);
+            _context.Remove(thisPlaylist);
+            _context.SaveChanges();        
+            return RedirectToAction("Dashboard","Streamify");
+        }
+
+
+
+        [HttpGet]
+        [Route("playlists/{playlistId}")]
+        public IActionResult Playlists(int PlaylistId)
+        {
+            if (SessionCheck()==0)
+            {
+                return RedirectToAction("Index","User");
+            }
+            
+            Playlist thisPlaylist = _context.Playlists.Include(m=>m.Musics).SingleOrDefault(p=>p.PlaylistId==PlaylistId);
             User userInSession = _context.Users.SingleOrDefault(u=>u.UserId == SessionCheck());
             ViewBag.User = userInSession;
+            ViewBag.Playlist= thisPlaylist;
             // ViewBag.Playlists = _context.Music.Include (p => p.)
         
             return View("playlists");
         }
+
+
+        [HttpGet]
+        [Route("musictron3000")]
+        public IActionResult MusicTron3000()
+        {
+
+            return View("musictron3000");
+        }
+
+        // [HttpPost]
+        // [Route("addtrack")]
+
+        // public IActionResult AddTrack(Music model)
+        // {
+        //     if (SessionCheck()==0)
+        //     {
+        //         return RedirectToAction("Index","User");
+        //     }
+        //     Playlist thisPlaylist = _context.Playlists.Include(m=>m.Musics).SingleOrDefault(p=>p.PlaylistId==PlaylistId);
+        //     Music newMusic = new Music
+        //     {
+        //         Song = model.Song,
+        //         Artist = model.Artist,
+        //         Album = model.Album
+        //     };
+
+        //     _context.Add(newMusic);
+        //     _context.SaveChanges();
+        //     return RedirectToAction("Dashboard");
+
+        // }   
+            
+        
     }
 }

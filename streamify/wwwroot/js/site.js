@@ -20,4 +20,10 @@ $( document ).ready(function(){
     });
 
 
+    $( "button#addtrack" ).click(function() {
+        var search = $( "input#getinfo" ).val();  
+        window.location.href = '/addtrack/' + search;
+    });
+
+
 });

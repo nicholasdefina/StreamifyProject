@@ -1,24 +1,36 @@
+<a href="logout">logout</a>
+
 <h3>Search For An Artist!</h3>
   <div class="container">
-      <input id="searchArtist" class="form-control">
+      <input id="searchArtist" class="form-control" value="Lou Bega">
       <button id="searchArtist">Submit </button>
   </div>
   <br>    
 
 <h3>Search For An Album!</h3>
   <div class="container">
-      <input id="searchAlbum" class="form-control">
+      <input id="searchAlbum" class="form-control" value="Lou Bega's Greatest Hits">
       <button id="searchAlbum">Submit </button>
   </div>
 
   <h3>Search For A Track!</h3>
   <div class="container">
-      <input id="searchTrack" class="form-control">
+      <input id="searchTrack" class="form-control" value="Mambo No. 5">
       <button id="searchTrack">Submit </button>
   </div> 
 
   <br>
   <br>
+
+  <a href="musictron3000"><h4>Or try the MusicTron 3000</h4></a>
+
+<h3>Your playlists</h3>
+  @foreach(var name in ViewBag.Playlists)
+  {
+      <ul>
+            <li><a href="playlists/@name.PlaylistId">@name.PName</a></li> <td><a href="/delete/@name.PlaylistId">(Delete)</a>
+      </ul>
+  }
   
 
 
@@ -34,4 +46,5 @@
 
     <input type="submit" name="submit" value="Create Playlist">
 </form>
+<br>
    

@@ -11,9 +11,10 @@ using System;
 namespace streamify.Migrations
 {
     [DbContext(typeof(StreamifyContext))]
-    partial class StreamifyContextModelSnapshot : ModelSnapshot
+    [Migration("20180330000132_Migration4")]
+    partial class Migration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
