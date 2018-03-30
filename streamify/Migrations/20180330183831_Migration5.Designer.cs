@@ -11,9 +11,10 @@ using System;
 namespace streamify.Migrations
 {
     [DbContext(typeof(StreamifyContext))]
-    partial class StreamifyContextModelSnapshot : ModelSnapshot
+    [Migration("20180330183831_Migration5")]
+    partial class Migration5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +40,7 @@ namespace streamify.Migrations
 
                     b.HasIndex("PlaylistId");
 
-                    b.ToTable("Musics");
+                    b.ToTable("Music");
                 });
 
             modelBuilder.Entity("streamify.Models.Playlist", b =>

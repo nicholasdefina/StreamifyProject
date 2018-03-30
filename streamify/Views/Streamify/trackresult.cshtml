@@ -21,9 +21,9 @@
           <div id="@song.mbid">
               <h6>Track Name: @song.name</h6>
               <h6>By: @song.artist</h6>
-        <a href='@Url.Action("AddTrack", "Streamify", new { song = @song.name })'> Add @song.name</a>
+        <a href='@Url.Action("AddTrack", "Streamify", new { song = @song.name, artist = @song.artist })'> Add @song.name</a>
          <h6>_____________________</h6>
-      </div>
+          </div>
       }
-  </div>
+        </div>
   </div>

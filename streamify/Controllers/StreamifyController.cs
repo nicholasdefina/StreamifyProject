@@ -146,6 +146,21 @@ namespace streamify.Controllers
         }
 
         [HttpGet]
+        [Route("delete/{musicId}")]
+        public IActionResult DeleteMusic(int MusicId)
+        {
+            if (SessionCheck()==0)
+            {
+                return RedirectToAction("Index","User");
+            }
+            
+            Music thisMusic = _context.Musics.SingleOrDefault(m=>m.MusicId == MusicId);
+            _context.Remove(thisMusic);
+            _context.SaveChanges();        
+            return RedirectToAction("Dashboard","Streamify");
+        }
+
+        [HttpGet]
         [Route("delete/{playlistId}")]
         public IActionResult Delete(int PlaylistId)
         {
@@ -189,28 +204,28 @@ namespace streamify.Controllers
             return View("musictron3000");
         }
 
-        // [HttpPost]
-        // [Route("addtrack")]
+        [HttpGet]
+        [Route("AddTrack/{song}/{artist}")]
 
-        // public IActionResult AddTrack(Music model)
-        // {
-        //     if (SessionCheck()==0)
-        //     {
-        //         return RedirectToAction("Index","User");
-        //     }
-        //     Playlist thisPlaylist = _context.Playlists.Include(m=>m.Musics).SingleOrDefault(p=>p.PlaylistId==PlaylistId);
-        //     Music newMusic = new Music
-        //     {
-        //         Song = model.Song,
-        //         Artist = model.Artist,
-        //         Album = model.Album
-        //     };
+        public IActionResult AddTrack(string song, string artist)
+        {
+            if (SessionCheck()==0)
+            {
+                return RedirectToAction("Index","User");
+            }
+            // Playlist thisPlaylist = _context.Playlists.Include(m=>m.Musics).SingleOrDefault(p=>p.PlaylistId==PlaylistId);
+            Music newMusic = new Music
+            {
+                PlaylistId= 2,
+                Song = song,
+                Artist = artist
+            };
 
-        //     _context.Add(newMusic);
-        //     _context.SaveChanges();
-        //     return RedirectToAction("Dashboard");
+            _context.Add(newMusic);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
 
-        // }   
+        }   
             
         
     }

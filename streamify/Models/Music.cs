@@ -6,6 +6,7 @@ namespace streamify.Models
     public class Music:BaseEntity
 
     {
+        public int PlaylistId{get;set;}
         public int MusicId {get;set;}
 
         public string Song {get;set;}
